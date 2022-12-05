@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { EventService } from "../../common/event.service";
+import { IEvent } from "../../entities/event";
 
 @Component({
     selector: 'events-list',
@@ -23,17 +25,21 @@ export class EventsListComponent {
         }
     }
 
-    events: any;
-    constructor(private eventService : EventService) {}
+    events: IEvent[];
+    constructor(private eventService : EventService, private route:ActivatedRoute) {}
 
     ngOnInit() {
         // this.events = this.eventService.getEvents();
 
-        this.eventService.getEventsAsync().subscribe(
-            events => {
-                this.events = events
-            }
-        );
+        // Gets the data by subscription
+        // this.eventService.getEventsAsync().subscribe(
+        //     events => {
+        //         this.events = events
+        //     }
+        // );
+
+        // Gets the data from the resolver that gets the data from the service using a subject subscription
+        this.events = this.route.snapshot.data['events'];
     }
 
     handleEventClicked(data) {
