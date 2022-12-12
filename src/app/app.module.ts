@@ -18,6 +18,7 @@ import {
 } from "./common/index";
 
 import { appRoutes } from './routes';
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { appRoutes } from './routes';
     EventService,
     EventRouteActivator,
     EventListResolver,
+    AuthService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkCreateState
